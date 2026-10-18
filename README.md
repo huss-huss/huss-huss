@@ -14,7 +14,7 @@
 - 🧠 I build **backend systems that put LLMs to work in production**: APIs, background job pipelines, data extraction, and the integrations that connect them.
 - 💼 Freelance engineer: **Top Rated Plus on Upwork** with **100% Job Success**.
 - 🎓 BSc in Electrical & Computer Engineering, **Addis Ababa University**.
-- 🌱 Currently building **FirstFetch**, a job-discovery tool that scores listings against a profile and syncs matches to Notion.
+- 🌱 Currently working on **FirstFetch** ([live](https://firstfetch-eight.vercel.app)) and **llm-gateway**: production LLM systems that are measurable, testable and cheap to run.
 
 ### 🛠️ What I work with
 
@@ -40,11 +40,22 @@
 ### 🚀 Featured projects
 
 <p align="center">
+  <a href="https://github.com/huss-huss/llm-gateway"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-llm-gateway.svg" width="49%" alt="llm-gateway"/></a>
   <a href="https://github.com/huss-huss/ai-support-automation-system"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-ai-support-automation-system.svg" width="49%" alt="ai-support-automation-system"/></a>
+  <a href="https://github.com/huss-huss/ai-job-intelligence-system"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-ai-job-intelligence-system.svg" width="49%" alt="FirstFetch"/></a>
+  <a href="https://github.com/huss-huss/crawlforge"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-crawlforge.svg" width="49%" alt="crawlforge"/></a>
   <a href="https://github.com/huss-huss/jarvis"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-jarvis.svg" width="49%" alt="jarvis"/></a>
   <a href="https://github.com/huss-huss/table-extraction-pro"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-table-extraction-pro.svg" width="49%" alt="table-extraction-pro"/></a>
-  <a href="https://github.com/huss-huss/n8n-ai-news2linked"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-n8n-ai-news2linked.svg" width="49%" alt="n8n-ai-news2linked"/></a>
 </p>
+
+| | Project | What it shows |
+|:-:|---|---|
+| 🛰️ | **[llm-gateway](https://github.com/huss-huss/llm-gateway)** | One OpenAI-compatible API over OpenAI, Anthropic and Ollama: fallback routing, circuit breakers, caching, per-key budgets, tracing, evals |
+| 🤖 | **[ai-support-automation-system](https://github.com/huss-huss/ai-support-automation-system)** | LLM triage → SLA routing → drafted replies; idempotent Celery retries, cost tracking, eval set, Alembic, CI on SQLite + Postgres |
+| 🎯 | **[FirstFetch](https://github.com/huss-huss/ai-job-intelligence-system)** · [live demo](https://firstfetch-eight.vercel.app) | Job discovery across 6 APIs with explainable scoring and location eligibility, structured LLM extraction, Notion sync, on Vercel + Neon |
+| 🕷️ | **[crawlforge](https://github.com/huss-huss/crawlforge)** | Async crawling framework: rate limits, robots.txt, retries, circuit breakers, dead-letter queue, Postgres sink, Prometheus, resume |
+| 🎙️ | **[jarvis](https://github.com/huss-huss/jarvis)** | Local-first agent: tool calling, permission model, SQLite memory, voice pipeline |
+| 📄 | **[table-extraction-pro](https://github.com/huss-huss/table-extraction-pro)** | Table Transformer + Camelot/Tabula fallbacks with a real GriTS implementation and a reproducible benchmark |
 
 ### 📊 GitHub at a glance
 

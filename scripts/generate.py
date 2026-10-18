@@ -29,14 +29,15 @@ TAGLINES = [
 
 # Featured repos, in display order. Description/language/topics come from the API.
 FEATURED = [
-    "ai-support-automation-system",
-    "jarvis",
-    "ai-job-intelligence-system",
-    "table-extraction-pro",
-    "n8n-ai-news2linked",
-    "crawlforge",
     "llm-gateway",
+    "ai-support-automation-system",
+    "ai-job-intelligence-system",
+    "crawlforge",
+    "jarvis",
+    "table-extraction-pro",
 ]
+# Card titles that differ from the repo name.
+DISPLAY = {"ai-job-intelligence-system": "FirstFetch · AI job intelligence"}
 SKIP_LANGS = {"Jupyter Notebook", "HTML", "CSS", "Shell", "Dockerfile", "Procfile", "Makefile"}
 LANG_COLORS = {
     "Python": "#3572A5", "TypeScript": "#3178c6", "JavaScript": "#f1e05a", "Dart": "#00B4AB",
@@ -184,7 +185,7 @@ def card(repo: dict, index: int) -> str:
 <g class="c">
   <rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="12" fill="{PANEL}" stroke="{BORDER}"/>
   <rect class="bar" x="1" y="1" width="{w - 2}" height="3" rx="1.5" fill="{color}"/>
-  <text class="t" x="24" y="40">{escape(repo["name"])}</text>
+  <text class="t" x="24" y="40">{escape(DISPLAY.get(repo["name"], repo["name"]))}</text>
   {''.join(f'<text class="d" x="24" y="{68 + i * 20}">{escape(line)}</text>' for i, line in enumerate(desc))}
   {''.join(chips)}
   <circle cx="30" cy="152" r="6" fill="{color}"/>
