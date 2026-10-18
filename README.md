@@ -49,7 +49,7 @@
 ### 📊 GitHub at a glance
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/stats.svg" width="100%" alt="Contributions, public repositories and top languages"/>
+  <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/stats.svg" width="100%" alt="Upwork track record and top languages"/>
 </p>
 
 ### 🤝 Let's work together

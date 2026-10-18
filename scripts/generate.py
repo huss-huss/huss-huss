@@ -44,17 +44,12 @@ LANG_COLORS = {
 }  # fmt: skip
 
 
-def api(query: str | None = None, path: str | None = None):
+def api(path: str):
     token = os.environ.get("GITHUB_TOKEN", "")
     headers = {"Accept": "application/vnd.github+json", "User-Agent": USER}
     if token:
         headers["Authorization"] = f"Bearer {token}"
-    if query:
-        req = urllib.request.Request(
-            "https://api.github.com/graphql", data=json.dumps({"query": query}).encode(), headers=headers
-        )
-    else:
-        req = urllib.request.Request(f"https://api.github.com{path}", headers=headers)
+    req = urllib.request.Request(f"https://api.github.com{path}", headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.load(resp)
@@ -202,7 +197,11 @@ def card(repo: dict, index: int) -> str:
 # --- stats -----------------------------------------------------------------------
 
 
-def stats(languages: list[tuple[str, float]], contributions: int, public_repos: int, since: str) -> str:
+# From the public Upwork profile; update by hand when they change.
+TRACK_RECORD = [("2,500+", "hours delivered on Upwork"), ("15", "freelance projects completed"), ("100%", "job success score")]
+
+
+def stats(languages: list[tuple[str, float]]) -> str:
     w, h = 1200, 210
     total = sum(v for _, v in languages) or 1
     shares = [(name, v / total) for name, v in languages]
@@ -221,8 +220,7 @@ def stats(languages: list[tuple[str, float]], contributions: int, public_repos: 
             f'<text class="m" x="{lx + 18}" y="177">{escape(name)} {share * 100:.0f}%</text>'
         )
         lx += 40 + len(name) * 8 + 40
-    figures = [(f"{contributions}", "contributions in the last year"), (str(public_repos), "public repositories"),
-               (since, "building on GitHub since")]  # fmt: skip
+    figures = TRACK_RECORD
     cols = "".join(
         f'<text class="big" x="{120 + i * 380}" y="70">{escape(v)}</text>'
         f'<text class="m" x="{120 + i * 380}" y="96">{escape(label)}</text>'
@@ -254,7 +252,6 @@ def main(out: Path) -> None:
         if repo and not repo.get("private"):
             (out / f"card-{name}.svg").write_text(card(repo, i % 2))
 
-    user = api(path=f"/users/{USER}")
     repos = api(path=f"/users/{USER}/repos?per_page=100&type=owner") or []
     totals: dict[str, float] = {}
     for r in repos:
@@ -264,9 +261,7 @@ def main(out: Path) -> None:
             if lang not in SKIP_LANGS:
                 totals[lang] = totals.get(lang, 0) + size
     top = sorted(totals.items(), key=lambda kv: -kv[1])[:6]
-    cal = api(query=f'{{user(login:"{USER}"){{contributionsCollection{{contributionCalendar{{totalContributions}}}}}}}}')
-    contributions = cal["data"]["user"]["contributionsCollection"]["contributionCalendar"]["totalContributions"]
-    (out / "stats.svg").write_text(stats(top, contributions, user["public_repos"], user["created_at"][:4]))
+    (out / "stats.svg").write_text(stats(top))
     print(f"wrote {len(list(out.glob('*.svg')))} SVGs to {out}")
 
 
