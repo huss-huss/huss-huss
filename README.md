@@ -1,12 +1,5 @@
-<!-- Header -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=200&section=header&text=Hussen%20Mohammed&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Backend%20%26%20AI%20Systems%20Engineer&descSize=20&descAlignY=58" width="100%" alt="Hussen Mohammed — Backend & AI Systems Engineer"/>
-</p>
-
-<p align="center">
-  <a href="https://github.com/huss-huss">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&duration=3000&pause=800&color=36BCF7&center=true&vCenter=true&width=680&lines=I+build+backends+that+put+LLMs+to+work;FastAPI+%C2%B7+Celery+%C2%B7+PostgreSQL+%C2%B7+Redis;Tool-calling+agents+%26+structured+outputs;Data+extraction+%26+automation+pipelines" alt="Typing intro"/>
-  </a>
+  <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/header.svg" width="100%" alt="Hussen Mohammed: Backend &amp; AI Systems Engineer"/>
 </p>
 
 <p align="center">
@@ -16,23 +9,21 @@
   <img src="https://img.shields.io/badge/Open%20to-Remote%20Roles-36BCF7?style=for-the-badge" alt="Open to remote roles"/>
 </p>
 
----
-
 ### 👋 About me
 
 - 🧠 I build **backend systems that put LLMs to work in production**: APIs, background job pipelines, data extraction, and the integrations that connect them.
 - 💼 Freelance engineer: **Top Rated Plus on Upwork** with **100% Job Success**.
 - 🎓 BSc in Electrical & Computer Engineering, **Addis Ababa University**.
-- 🌱 Currently building a job-discovery tool that scores listings with an LLM and syncs matches to Notion.
+- 🌱 Currently building **FirstFetch**, a job-discovery tool that scores listings against a profile and syncs matches to Notion.
 
 ### 🛠️ What I work with
 
 <p align="center"><b>Backend</b><br/>
-  <img src="https://skillicons.dev/icons?i=python,fastapi,nodejs,ts,js,postgres,mongodb,redis,supabase&perline=9" alt="Backend stack"/>
+  <img src="https://skillicons.dev/icons?i=python,fastapi,nodejs,ts,js,postgres,mongodb,redis,supabase&perline=9" alt="Python, FastAPI, Node.js, TypeScript, JavaScript, PostgreSQL, MongoDB, Redis, Supabase"/>
 </p>
 
 <p align="center"><b>AI · Data · Automation</b><br/>
-  <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logoColor=white" alt="OpenAI"/>
+  <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square" alt="OpenAI"/>
   <img src="https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white" alt="Ollama"/>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"/>
   <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face"/>
@@ -43,37 +34,22 @@
 </p>
 
 <p align="center"><b>Frontend · DevOps</b><br/>
-  <img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,docker,githubactions,gcp,linux,git&perline=8" alt="Frontend and DevOps stack"/>
+  <img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,docker,githubactions,gcp,linux,git&perline=8" alt="React, Next.js, Tailwind, Docker, GitHub Actions, GCP, Linux, Git"/>
 </p>
 
 ### 🚀 Featured projects
 
 <p align="center">
-  <a href="https://github.com/huss-huss/ai-support-automation-system"><img src="https://github-readme-stats.vercel.app/api/pin/?username=huss-huss&repo=ai-support-automation-system&theme=tokyonight&hide_border=true&border_radius=10" alt="ai-support-automation-system"/></a>
-  <a href="https://github.com/huss-huss/jarvis"><img src="https://github-readme-stats.vercel.app/api/pin/?username=huss-huss&repo=jarvis&theme=tokyonight&hide_border=true&border_radius=10" alt="jarvis"/></a>
-  <a href="https://github.com/huss-huss/table-extraction-pro"><img src="https://github-readme-stats.vercel.app/api/pin/?username=huss-huss&repo=table-extraction-pro&theme=tokyonight&hide_border=true&border_radius=10" alt="table-extraction-pro"/></a>
-  <a href="https://github.com/huss-huss/n8n-ai-news2linked"><img src="https://github-readme-stats.vercel.app/api/pin/?username=huss-huss&repo=n8n-ai-news2linked&theme=tokyonight&hide_border=true&border_radius=10" alt="n8n-ai-news2linked"/></a>
+  <a href="https://github.com/huss-huss/ai-support-automation-system"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-ai-support-automation-system.svg" width="49%" alt="ai-support-automation-system"/></a>
+  <a href="https://github.com/huss-huss/jarvis"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-jarvis.svg" width="49%" alt="jarvis"/></a>
+  <a href="https://github.com/huss-huss/table-extraction-pro"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-table-extraction-pro.svg" width="49%" alt="table-extraction-pro"/></a>
+  <a href="https://github.com/huss-huss/n8n-ai-news2linked"><img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/card-n8n-ai-news2linked.svg" width="49%" alt="n8n-ai-news2linked"/></a>
 </p>
 
-| | Project | Highlights |
-|:-:|---|---|
-| 🤖 | **[ai-support-automation-system](https://github.com/huss-huss/ai-support-automation-system)** | LLM triage → SLA routing → drafted replies, async with Celery, full audit log |
-| 🎙️ | **[jarvis](https://github.com/huss-huss/jarvis)** | Local-first agent: tool calling, permission model, SQLite memory, voice pipeline |
-| 📄 | **[table-extraction-pro](https://github.com/huss-huss/table-extraction-pro)** | Table Transformer + fallback parsers, quality comparison, GriTS evaluation |
-| 🔁 | **[n8n-ai-news2linked](https://github.com/huss-huss/n8n-ai-news2linked)** | News → LLM summary → LinkedIn, fully automated |
-
-### 📊 GitHub activity
+### 📊 GitHub at a glance
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com/?user=huss-huss&theme=tokyonight&hide_border=true&border_radius=10" height="165" alt="GitHub streak"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=huss-huss&layout=compact&theme=tokyonight&hide_border=true&border_radius=10&langs_count=8" height="165" alt="Top languages"/>
-</p>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/huss-huss/huss-huss/output/github-snake-dark.svg"/>
-    <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/github-snake.svg" alt="Contribution snake animation"/>
-  </picture>
+  <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/stats.svg" width="100%" alt="Contributions, public repositories and top languages"/>
 </p>
 
 ### 🤝 Let's work together
@@ -84,4 +60,4 @@
 
 <p align="center"><i>Open to backend / AI engineering roles (remote) and freelance projects.</i></p>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2c5364,50:203a43,100:0f2027&height=110&section=footer" width="100%" alt=""/>
+<img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/footer.svg" width="100%" alt=""/>
