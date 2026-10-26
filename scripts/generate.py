@@ -35,6 +35,8 @@ FEATURED = [
     "crawlforge",
     "jarvis",
     "table-extraction-pro",
+    "company-data-platform",
+    "gcp-event-pipeline",
 ]
 # Card titles that differ from the repo name.
 DISPLAY = {"ai-job-intelligence-system": "FirstFetch · AI job intelligence"}
