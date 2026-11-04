@@ -64,7 +64,18 @@
 ### 📊 GitHub at a glance
 
 <p align="center">
+  <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/activity.svg" width="100%" alt="Contributions over the last 12 months"/>
+</p>
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/stats.svg" width="100%" alt="Upwork track record and top languages"/>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/huss-huss/huss-huss/output/snake.svg"/>
+    <img src="https://raw.githubusercontent.com/huss-huss/huss-huss/output/snake-light.svg" width="100%" alt="Contribution graph being eaten by a snake"/>
+  </picture>
 </p>
 
 ### 🤝 Let's work together

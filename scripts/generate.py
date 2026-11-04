@@ -9,7 +9,9 @@ never depends on third-party image services. Standard library only.
 from __future__ import annotations
 
 import json
+import math
 import os
+from datetime import date
 import sys
 import urllib.request
 from html import escape
@@ -60,6 +62,18 @@ def api(path: str):
         if exc.code == 404:
             return None
         raise
+
+
+def graphql(query: str) -> dict:
+    token = os.environ.get("GITHUB_TOKEN", "")
+    headers = {"Content-Type": "application/json", "User-Agent": USER, "Authorization": f"Bearer {token}"}
+    body = json.dumps({"query": query}).encode()
+    req = urllib.request.Request("https://api.github.com/graphql", data=body, headers=headers)
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        payload = json.load(resp)
+    if payload.get("errors"):
+        raise RuntimeError(payload["errors"])
+    return payload["data"]
 
 
 # --- header / footer -------------------------------------------------------------
@@ -245,6 +259,108 @@ def stats(languages: list[tuple[str, float]]) -> str:
 </svg>"""
 
 
+# --- contribution activity -------------------------------------------------------
+
+CONTRIB_QUERY = """query { user(login: "%s") { contributionsCollection {
+  totalCommitContributions totalPullRequestContributions totalPullRequestReviewContributions
+  contributionCalendar { totalContributions weeks { contributionDays { date contributionCount } } }
+} } }"""
+
+
+def _smooth(points: list[tuple[float, float]], floor: float) -> str:
+    """Catmull-Rom spline through the points, as SVG cubic Béziers."""
+    d = f"M{points[0][0]:.1f} {points[0][1]:.1f}"
+    for i in range(len(points) - 1):
+        p0, p1, p2 = points[max(i - 1, 0)], points[i], points[i + 1]
+        p3 = points[min(i + 2, len(points) - 1)]
+        # Clamp control points so the curve never dips below the zero line.
+        c1 = (p1[0] + (p2[0] - p0[0]) / 6, min(p1[1] + (p2[1] - p0[1]) / 6, floor))
+        c2 = (p2[0] - (p3[0] - p1[0]) / 6, min(p2[1] - (p3[1] - p1[1]) / 6, floor))
+        d += f" C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}"
+    return d
+
+
+def activity(data: dict) -> str:
+    cc = data["user"]["contributionsCollection"]
+    cal = cc["contributionCalendar"]
+    weeks = cal["weeks"]
+    days = [(d["date"], d["contributionCount"]) for w in weeks for d in w["contributionDays"]]
+    weekly = [sum(d["contributionCount"] for d in w["contributionDays"]) for w in weeks]
+    active = sum(1 for _, n in days if n)
+
+    w, h = 1200, 400
+    left, right, top, bottom = 50, 1150, 150, 340
+    peak = max(weekly) or 1
+    # Square-root scale keeps quiet weeks visible next to busy ones.
+    ys = [bottom - math.sqrt(v / peak) * (bottom - top) for v in weekly]
+    step = (right - left) / max(len(weekly) - 1, 1)
+    pts = [(left + i * step, y) for i, y in enumerate(ys)]
+    line = _smooth(pts, bottom)
+    area = f"{line} L{right:.1f} {bottom} L{left} {bottom}Z"
+
+    months, seen = [], set()
+    for i, wk in enumerate(weeks):
+        first = wk["contributionDays"][0]["date"]
+        label = date.fromisoformat(first).strftime("%b")
+        if label not in seen and int(first[8:]) <= 7:
+            seen.add(label)
+            months.append(f'<text class="ax" x="{left + i * step:.1f}" y="{bottom + 26}" text-anchor="middle">{label}</text>')
+
+    grid = "".join(
+        f'<line x1="{left}" x2="{right}" y1="{top + f * (bottom - top):.1f}" y2="{top + f * (bottom - top):.1f}" class="grid"/>'
+        for f in (0, 0.25, 0.5, 0.75, 1)
+    )
+    ipk = weekly.index(peak)
+    px, py = pts[ipk]
+    figures = [
+        (f"{cal['totalContributions']:,}", "contributions in the last year"),
+        (f"{cc['totalCommitContributions']:,}", "commits"),
+        (f"{cc['totalPullRequestContributions'] + cc['totalPullRequestReviewContributions']:,}", "pull requests & reviews"),
+        (f"{active}", "active days this year"),
+    ]
+    cols = "".join(
+        f'<g class="fig" style="animation-delay:{i * 0.12:.2f}s">'
+        f'<text class="big" x="{50 + i * 280}" y="62">{escape(v)}</text>'
+        f'<text class="m" x="{50 + i * 280}" y="88">{escape(label)}</text></g>'
+        for i, (v, label) in enumerate(figures)
+    )
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">
+<defs>
+  <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="{ACCENT}" stop-opacity=".45"/><stop offset="100%" stop-color="{ACCENT}" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="stroke" x1="0" x2="1">
+    <stop offset="0%" stop-color="#2c5364"/><stop offset="60%" stop-color="{ACCENT}"/><stop offset="100%" stop-color="#7ee787"/>
+  </linearGradient>
+  <clipPath id="reveal"><rect x="0" y="0" width="0" height="{h}"><animate attributeName="width" from="0" to="{w}" dur="2.2s" begin=".3s" fill="freeze"/></rect></clipPath>
+</defs>
+<style>
+  .big {{ font: 700 30px {FONT}; fill: {ACCENT}; }}
+  .m {{ font: 400 14px {FONT}; fill: {MUTED}; }}
+  .ax {{ font: 400 12px {FONT}; fill: {MUTED}; }}
+  .ttl {{ font: 600 15px {FONT}; fill: {TEXT}; }}
+  .grid {{ stroke: {BORDER}; stroke-dasharray: 3 5; }}
+  .fig {{ animation: in .8s ease-out both; }}
+  .pk {{ font: 600 12px {FONT}; fill: {TEXT}; }}
+  .pulse {{ animation: pulse 2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }}
+  @keyframes in {{ from {{ opacity: 0; transform: translateY(8px); }} to {{ opacity: 1; transform: none; }} }}
+  @keyframes pulse {{ 0%,100% {{ opacity: .9; transform: scale(1); }} 50% {{ opacity: .2; transform: scale(2.4); }} }}
+</style>
+<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="12" fill="{PANEL}" stroke="{BORDER}"/>
+{cols}
+<text class="ttl" x="{left}" y="{top - 18}">Weekly contributions · last 12 months</text>
+{grid}
+<g clip-path="url(#reveal)">
+  <path d="{area}" fill="url(#fill)"/>
+  <path d="{line}" fill="none" stroke="url(#stroke)" stroke-width="3" stroke-linecap="round"/>
+  <circle class="pulse" cx="{px:.1f}" cy="{py:.1f}" r="5" fill="{ACCENT}"/>
+  <circle cx="{px:.1f}" cy="{py:.1f}" r="5" fill="{ACCENT}" stroke="{PANEL}" stroke-width="2"/>
+  <text class="pk" x="{min(px, right - 60):.1f}" y="{py - 14:.1f}" text-anchor="middle">{peak} in a week</text>
+</g>
+{''.join(months)}
+</svg>"""
+
+
 def main(out: Path) -> None:
     out.mkdir(parents=True, exist_ok=True)
     (out / "header.svg").write_text(header())
@@ -265,6 +381,7 @@ def main(out: Path) -> None:
                 totals[lang] = totals.get(lang, 0) + size
     top = sorted(totals.items(), key=lambda kv: -kv[1])[:6]
     (out / "stats.svg").write_text(stats(top))
+    (out / "activity.svg").write_text(activity(graphql(CONTRIB_QUERY % USER)))
     print(f"wrote {len(list(out.glob('*.svg')))} SVGs to {out}")
 
 
