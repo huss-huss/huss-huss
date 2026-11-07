@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="90" viewBox="0 0 1200 90">
+<defs><linearGradient id="f" x1="0" x2="1"><stop offset="0%" stop-color="#2c5364"/><stop offset="50%" stop-color="#203a43"/><stop offset="100%" stop-color="#0f2027"/></linearGradient></defs>
+<path fill="url(#f)" d="M0 40 Q300 0 600 40 T1200 40 V90 H0Z">
+  <animate attributeName="d" dur="7s" repeatCount="indefinite" values="M0 40 Q300 0 600 40 T1200 40 V90 H0Z;M0 35 Q300 75 600 35 T1200 35 V90 H0Z;M0 40 Q300 0 600 40 T1200 40 V90 H0Z"/>
+</path>
+</svg>
