@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="170" viewBox="0 0 580 170">
+<style>
+  .c { animation: in .8s 0.15s ease-out both; }
+  .t { font: 600 19px 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; fill: #36bcf7; }
+  .d { font: 400 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; fill: #e6edf3; }
+  .chip { font: 500 12px 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; fill: #36bcf7; }
+  .m { font: 400 13px 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; fill: #8b949e; }
+  .bar { animation: grow 1.4s 0.44999999999999996s ease-out both; transform-origin: left; }
+  @keyframes in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+</style>
+<g class="c">
+  <rect x=".5" y=".5" width="579" height="169" rx="12" fill="#161b22" stroke="#30363d"/>
+  <rect class="bar" x="1" y="1" width="578" height="3" rx="1.5" fill="#3572A5"/>
+  <text class="t" x="24" y="40">crawlforge</text>
+  <text class="d" x="24" y="68">Resilient, observable async crawling framework: per-domain rate limits,</text><text class="d" x="24" y="88">robots.txt, retries with backoff, circuit breakers, dead-letter queue…</text>
+  <rect x="24" y="112" width="64" height="22" rx="11" fill="#36bcf7" fill-opacity=".12"/><text class="chip" x="56" y="127" text-anchor="middle">asyncio</text><rect x="96.4" y="112" width="64" height="22" rx="11" fill="#36bcf7" fill-opacity=".12"/><text class="chip" x="129" y="127" text-anchor="middle">crawler</text><rect x="168.8" y="112" width="129" height="22" rx="11" fill="#36bcf7" fill-opacity=".12"/><text class="chip" x="233" y="127" text-anchor="middle">data-engineering</text><rect x="306.0" y="112" width="50" height="22" rx="11" fill="#36bcf7" fill-opacity=".12"/><text class="chip" x="331" y="127" text-anchor="middle">httpx</text>
+  <circle cx="30" cy="152" r="6" fill="#3572A5"/>
+  <text class="m" x="42" y="157">Python</text>
+  <text class="m" x="556" y="157" text-anchor="end">★ 0</text>
+</g>
+</svg>
